@@ -40,7 +40,7 @@ export const BeeSwapProvider = ({ children, beeId }: PropsWithChildren<{beeId: s
   function RenderBeeSwapAds({ id, className }: RenderAdsProps) {
     useEffect(() => {
       window.renderBeeSwapAds();
-    });
+    }, []);
 
     return (
       <div id={id} className={className} />
