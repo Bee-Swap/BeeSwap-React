@@ -24,7 +24,7 @@ export type BeeSwapProps = {
 export const BeeSwapContext = React.createContext<BeeSwapProps | null>(null);
 
 export const BeeSwapProvider = ({ children, beeId }: PropsWithChildren<{beeId: string}>) => {
-  async function fetchAndAttachScript() {
+  function fetchAndAttachScript() {
     const script = document.createElement('script');
     script.id = 'beeSwapScript';
     script.setAttribute('data-beeswapid', beeId);
@@ -35,7 +35,7 @@ export const BeeSwapProvider = ({ children, beeId }: PropsWithChildren<{beeId: s
 
   useEffect(() => {
     fetchAndAttachScript();
-  }, []);
+  });
 
   function RenderBeeSwapAds({ id, className }: RenderAdsProps) {
     useEffect(() => {
