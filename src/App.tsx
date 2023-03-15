@@ -3,6 +3,7 @@ import React, {
   useEffect,
   PropsWithChildren,
   ReactElement,
+  useState,
 } from 'react';
 
 declare global {
@@ -24,12 +25,14 @@ export type BeeSwapProps = {
 export const BeeSwapContext = React.createContext<BeeSwapProps | null>(null);
 
 export const BeeSwapProvider = ({ children, beeId }: PropsWithChildren<{beeId: string}>) => {
+  const [hasLoaded, setHasLoaded] = useState(false);
   function fetchAndAttachScript() {
     const script = document.createElement('script');
     script.id = 'beeSwapScript';
     script.setAttribute('data-beeswapid', beeId);
     script.src = `https://hive.getbeeswap.com/embeds/${beeId}.js`;
     script.async = true;
+    script.onload = () => setHasLoaded(true);
     document.head.appendChild(script);
   }
 
@@ -39,7 +42,9 @@ export const BeeSwapProvider = ({ children, beeId }: PropsWithChildren<{beeId: s
 
   function RenderBeeSwapAds({ id, className }: RenderAdsProps) {
     useEffect(() => {
-      window.renderBeeSwapAds();
+      if (hasLoaded) {
+        window.renderBeeSwapAds();
+      }
     }, []);
 
     return (
