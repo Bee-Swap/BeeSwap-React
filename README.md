@@ -28,13 +28,16 @@ ReactDOM.render(
 2. Anywhere you want to embed a BeeSwap ad, use the following snippet:
 
 ```jsx
-  const { RenderBeeSwapAds } = useBeeSwap();
+  import { useBeeSwap } from 'beeswap-react';
   
   //You may want to change the id below based on the ad type you are loading.
   //Your snippet also may also allow for you to instead pass a className.
-  const MyComponent = () => ({
-    <RenderBeeSwapAds id="bee-oneone-wide-inj-1" /> 
-  })
+  const MyComponent = () => {
+    const { RenderBeeSwapAds } = useBeeSwap();
+    return (
+      <RenderBeeSwapAds id="bee-oneone-wide-inj-1" /> 
+    );
+  };
 ```
 
-And that's it! If you have any problems with set up. Please reach out to: hello@getbeeswap.com for assistance!
+And that's it! If you have any problems with set up, please reach out to: hello@getbeeswap.com for assistance!
